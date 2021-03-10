@@ -1,11 +1,3 @@
-//
-//  SceneDelegate.swift
-//  weather-clone
-//
-//  Created by Филипп Житников on 08.03.2021.
-//  Copyright © 2021 phzhitnikov. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
 
@@ -20,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = MainScreenView()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
