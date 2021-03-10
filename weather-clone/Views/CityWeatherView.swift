@@ -11,7 +11,7 @@ struct CityWeatherView: View {
         Group {
             if self.weather.isLoading {
                 // TODO: animate
-                Image(systemName: "hourglass").imageScale(.large)
+                Image(systemName: "hourglass").imageScale(.large).spinning()
             } else {
                 VStack {
                     HeaderView(viewModel: self.weather)
