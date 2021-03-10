@@ -15,6 +15,8 @@ struct DailyTemperature: Codable {
 
 // FIXME: setting all fields to Optional seems wrong, consider refactoring
 struct Weather: Codable, Identifiable {
+    var id: String { "\(String(describing: dt))" }
+
     var dt, sunrise, sunset: TimeInterval?
     
     var temp, feels_like: Temperature?
@@ -29,9 +31,10 @@ struct Weather: Codable, Identifiable {
     var wind_deg: Int?  // FIXME: consider Angle.degrees here?
 
     var pop: Double? // probability of precipitation
-    var rain, snow: Double?  // mm
+    var rain, snow: Dictionary<String, Double>?  // last hour volume in mm  FIXME: type
     
-    var id: String { "\(String(describing: dt))" }
+    var rainValue: Double? { return self.rain?["1h"] }
+    var snowValue: Double? { return self.snow?["1h"] }
 }
 
 // FIXME: DRY
