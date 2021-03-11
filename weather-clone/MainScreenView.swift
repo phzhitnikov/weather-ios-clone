@@ -3,17 +3,21 @@ import CoreLocation
 
 struct MainScreenView: View {
     @EnvironmentObject var cityStore: CityStore
-    @State var showCitiesList: Bool = false
     
     var body: some View {
-        // TODO: cities on pages
-        // TODO: footer
-        CityWeatherView(city: self.cityStore.cities[1]!)
-        
-//        Image(systemName: "list.dash")
-//        .imageScale(.large)
-//        .onTapGesture { self.showCitiesList = true }
-//        .popover(isPresented: self.$showCitiesList) { CityList(cities: cities) }
+        NavigationView {
+            List {
+                ForEach(self.cityStore.cities) { city in
+                    NavigationLink(destination: CityWeatherView(city: city)) {
+                        Text(city.name)
+                    }
+                }
+                .onDelete { indexSet in
+                    self.cityStore.cities.remove(atOffsets: indexSet)
+                }
+            }
+            .navigationBarTitle(Text("Select city"))
+        }
     }
 }
 
