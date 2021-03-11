@@ -28,6 +28,7 @@
 		9CE6192725F84E1000BBC1BB /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6192625F84E1000BBC1BB /* Misc.swift */; };
 		9CE6192925F8F8FA00BBC1BB /* Spinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6192825F8F8FA00BBC1BB /* Spinning.swift */; };
 		9CE6192D25F8FBBA00BBC1BB /* CityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6192C25F8FBBA00BBC1BB /* CityStore.swift */; };
+		9CE6192F25FA5AAF00BBC1BB /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE6192E25FA5AAF00BBC1BB /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		9CE6192625F84E1000BBC1BB /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		9CE6192825F8F8FA00BBC1BB /* Spinning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinning.swift; sourceTree = "<group>"; };
 		9CE6192C25F8FBBA00BBC1BB /* CityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityStore.swift; sourceTree = "<group>"; };
+		9CE6192E25FA5AAF00BBC1BB /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				9CE6191325F67BA000BBC1BB /* HeaderView.swift */,
 				9CE6191525F68E7100BBC1BB /* HourlyForecastView.swift */,
 				9CE6192425F83E6700BBC1BB /* WeatherDetailView.swift */,
+				9CE6192E25FA5AAF00BBC1BB /* BackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				9CE6192525F83E6700BBC1BB /* WeatherDetailView.swift in Sources */,
 				9CE6192925F8F8FA00BBC1BB /* Spinning.swift in Sources */,
 				9CE618FA25F6330600BBC1BB /* MainScreenView.swift in Sources */,
+				9CE6192F25FA5AAF00BBC1BB /* BackgroundView.swift in Sources */,
 				9CE6191425F67BA000BBC1BB /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

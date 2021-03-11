@@ -1,9 +1,7 @@
 import Foundation
 import CoreLocation
 
-class WeatherViewModel: ObservableObject {
-    private var client = OpenWeatherMapAPIClient()
-    
+class WeatherViewModel: ObservableObject {    
     @Published var currentWeather: Weather?
     @Published var hourlyWeather: [Weather]?
     @Published var dailyWeather: [MultiWeather]?
@@ -18,7 +16,7 @@ class WeatherViewModel: ObservableObject {
     
     func fetchWeatherData() {
         self.isLoading = true
-        self.client.getForecastByCoords(lat: self.city.lat, long: self.city.long) { weather, error in
+        OpenWeatherMapAPIClient.getWeather(self.city) { weather, error in
             if weather != nil {
                 self.currentWeather = weather?.current
                 self.hourlyWeather = weather?.hourly

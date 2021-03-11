@@ -26,7 +26,7 @@ struct HourlyForecastSectionView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(weather ?? []) { data in
+                ForEach(self.weather ?? []) { data in
                     HourlyForecastView(data: data)
                     Spacer().frame(width: 24)
                 }

@@ -4,9 +4,9 @@ import CoreLocation
 
 class OpenWeatherMapAPIClient {
     private static let host: String = "api.openweathermap.org"
-    private let apiKey: String = "a002bd4fab71c3e41d079ddd94e9f030"
+    private static let apiKey: String = "a002bd4fab71c3e41d079ddd94e9f030"  // Storing API keys in repo is no-no, but it's just a demo, right?
 
-    private var defaultParams: [URLQueryItem] {
+    private static var defaultParams: [URLQueryItem] {
         get {
             return [
                 "appid": self.apiKey,
@@ -18,17 +18,17 @@ class OpenWeatherMapAPIClient {
     
     init() { }
     
-    private func baseUrl(method: OWMAPIMethods, params: [URLQueryItem]) -> URL? {
+    static func baseUrl(method: OWMAPIMethods, params: [URLQueryItem]) -> URL? {
         var url = URLComponents()
         url.scheme = "https"
-        url.host = OpenWeatherMapAPIClient.host
+        url.host = self.host
         url.path = method.rawValue
         url.queryItems = params + self.defaultParams
         
         return url.url
     }
     
-    func getBaseRequest<T: Codable>(_ method: OWMAPIMethods,
+    static func getBaseRequest<T: Codable>(_ method: OWMAPIMethods,
                                     params: [URLQueryItem],
                                     callback onComplete:  @escaping (_ object: T?,_ error: Error?) -> ()) {
         
@@ -76,18 +76,11 @@ class OpenWeatherMapAPIClient {
 
 // Weather API
 extension OpenWeatherMapAPIClient {
-    func getWeather(cityID: Int) {
-        // TODO: implement
-        // Get coords of city
-        // Pass it to getForecastByCoords
-    }
-    
-    func getForecastByCoords(lat latitude: Double, long longitude: Double,
-                             callback onComplete: @escaping (OneCallForecastResponse?, Error?) -> Void) {
+    static func getWeather(_ city: City, callback onComplete: @escaping (OneCallForecastResponse?, Error?) -> Void) {
         
         let params: [URLQueryItem] = [
-            URLQueryItem(name: "lat", value: String(latitude)),
-            URLQueryItem(name: "lon", value: String(longitude))
+            URLQueryItem(name: "lat", value: String(city.lat)),
+            URLQueryItem(name: "lon", value: String(city.long))
         ]
         
         self.getBaseRequest(.OneCall, params: params) { (weather: OneCallForecastResponse?, error) in

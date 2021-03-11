@@ -10,30 +10,32 @@ struct CityWeatherView: View {
     var body: some View {
         Group {
             if self.weather.isLoading {
-                // TODO: animate
                 Image(systemName: "hourglass").imageScale(.large).spinning()
             } else {
-                VStack {
-                    HeaderView(viewModel: self.weather)
-                    
-                    ScrollView(.vertical, showsIndicators: false) {
-                        CurrentTempView(viewModel: self.weather)
-                        Divider()
-                        HourlyForecastSectionView(weather: self.weather.hourlyWeather)
-                        Divider()
-                        DailyForecastSectionView(data: self.weather.dailyWeather)
+                ZStack {
+                    BackgroundView()  // TODO: select background based on day/night/weather
+                    VStack {
+                        HeaderView(viewModel: self.weather)
                         
-                        Divider()
-                        
-                        VStack(alignment: .leading, spacing: 2) {
-                            ForEach(self.weather.details.map { $0 }, id: \.title) { item in
-                                // TODO: hide items with empty text
-                                Group {
-                                    WeatherDetailView(title: item.title, text: item.text)
-                                    Divider()
+                        ScrollView(.vertical, showsIndicators: false) {
+                            CurrentTempView(viewModel: self.weather)
+                            Divider()
+                            HourlyForecastSectionView(weather: self.weather.hourlyWeather)
+                            Divider()
+                            DailyForecastSectionView(data: self.weather.dailyWeather)
+                            
+                            Divider()
+                            
+                            VStack(alignment: .leading, spacing: 2) {
+                                ForEach(self.weather.details.map { $0 }, id: \.title) { item in
+                                    // TODO: hide items with empty text
+                                    Group {
+                                        WeatherDetailView(title: item.title, text: item.text)
+                                        Divider()
+                                    }
                                 }
-                            }
-                        }.padding(.horizontal, 8)
+                            }.padding(.horizontal, 8)
+                        }
                     }
                 }
             }
