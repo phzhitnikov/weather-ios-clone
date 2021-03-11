@@ -33,9 +33,9 @@ class CityStore: ObservableObject {
         let defaultCity = City(id: 1, name: "Saint-Petersburg", lat: 59.9167, long: 30.25)
         self.cities = UserDefaults.standard.object(forKey: defaultsKey) as? [City] ?? [defaultCity]
         
-        // TODO: autosave
-//        self.autosave = self.$cities.sink { newCities in
-//            UserDefaults.standard.set(newCities, forKey: defaultsKey)
-//        }
+        self.autosave = self.$cities.sink { newCities in
+            let data = newCities.map { try? JSONEncoder().encode($0) }
+            UserDefaults.standard.set(data, forKey: defaultsKey)
+        }
     }
 }
