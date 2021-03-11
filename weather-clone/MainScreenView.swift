@@ -17,6 +17,9 @@ struct MainScreenView: View {
                 }
             }
             .navigationBarTitle(Text("Select city"))
+            .navigationBarItems(trailing: Button(action: {},
+                                                 label: { Image(systemName: "plus").imageScale(.large) })
+            )
         }
     }
 }
