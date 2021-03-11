@@ -19,7 +19,7 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        let city = City(id: 1, name: "Saint-Petersburg", lat: 59.9167, long: 30.25)
+        let city = City(name: "Saint-Petersburg", lat: 59.9167, long: 30.25)
         let viewModel = WeatherViewModel(city)
         return HeaderView(viewModel: viewModel)
     }

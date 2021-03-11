@@ -15,7 +15,6 @@ struct DailyForecastView: View {
             FallbackSystemImage(source: self.data.weather?.first?.icon, fallbackSystemIcon: "questionmark.circle")
                 .frame(width: 30, height: 30)
             
-            // FIXME: make temps equal width, so they are aligned in column in pretty way
             Text(self.data.temp?.max?.formatted() ?? "")
                 .frame(minWidth: 40)
             Spacer().frame(width: 34)

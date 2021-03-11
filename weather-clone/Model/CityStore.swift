@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 struct City: Codable, Identifiable, Equatable {
-    var id: Int
+    var id = UUID()
     var owm_id: Int = -1  // city id in OWM
     var name: String
     var lat: Double
@@ -12,10 +12,10 @@ struct City: Codable, Identifiable, Equatable {
 class CityStore: ObservableObject {
     let storeName: String
     
-    private let defaultCities = [
-        City(id: 1, name: "Saint-Petersburg", lat: 59.9167, long: 30.25),
-        City(id: 2, name: "Miami", lat: 33.3992, long: -110.8687),
-        City(id: 3, name: "Berlin", lat: 43.968, long: -88.9435)
+    static let defaultCities = [
+        City(name: "Saint-Petersburg", lat: 59.9167, long: 30.25),
+        City(name: "Miami", lat: 33.3992, long: -110.8687),
+        City(name: "Berlin", lat: 43.968, long: -88.9435)
     ]
     
     @Published var cities: [City]
@@ -37,13 +37,12 @@ class CityStore: ObservableObject {
         self.storeName = name
         let defaultsKey = "WeatherCloneStore.\(name)"
         
-        // TODO: when city search will be implemented, change to loading from UserDefaults
-        self.cities = self.defaultCities
-//        self.cities = UserDefaults.standard.object(forKey: defaultsKey) as? [City] ?? []
+        self.cities = UserDefaults.standard.object(forKey: defaultsKey) as? [City] ?? CityStore.defaultCities
         
         self.autosave = self.$cities.sink { newCities in
             let data = newCities.map { try? JSONEncoder().encode($0) }
             UserDefaults.standard.set(data, forKey: defaultsKey)
+            // FIXME: why you are not saving??
         }
     }
 }
