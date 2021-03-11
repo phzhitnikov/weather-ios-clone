@@ -32,11 +32,11 @@ class WeatherViewModel: ObservableObject {
         return self.currentWeather?.weather?.first?.main
     }
     
-    var minTempToday: Double? {
+    var minTempToday: Temperature? {
         return self.dailyWeather?.first?.temp?.min
     }
     
-    var maxTempToday: Double? {
+    var maxTempToday: Temperature? {
         return self.dailyWeather?.first?.temp?.max
     }
     

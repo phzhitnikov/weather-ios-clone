@@ -1,13 +1,5 @@
 import Foundation
 
-typealias Temperature = Double
-
-extension Temperature {
-    func formatted(decimalPlaces: UInt = 0) -> String {
-        return String(format: "%.\(decimalPlaces)f°", self)
-    }
-}
-
 struct DailyTemperature: Codable {
     var morn, day, eve, night: Temperature
     var min, max: Temperature?
