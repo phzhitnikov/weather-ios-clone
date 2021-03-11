@@ -5,16 +5,6 @@ import CoreLocation
 class OpenWeatherMapAPIClient {
     private static let host: String = "api.openweathermap.org"
     private static let apiKey: String = "a002bd4fab71c3e41d079ddd94e9f030"  // Storing API keys in repo is no-no, but it's just a demo, right?
-
-    private static var defaultParams: [URLQueryItem] {
-        get {
-            return [
-                "appid": self.apiKey,
-                "units": "metric",
-                "exclude": "minutely"
-            ].asURLQueryParams()
-        }
-    }
     
     init() { }
     
@@ -23,7 +13,7 @@ class OpenWeatherMapAPIClient {
         url.scheme = "https"
         url.host = self.host
         url.path = method.rawValue
-        url.queryItems = params + self.defaultParams
+        url.queryItems = params + ["appid": self.apiKey].asURLQueryParams()
         
         return url.url
     }
@@ -76,14 +66,43 @@ class OpenWeatherMapAPIClient {
 
 // Weather API
 extension OpenWeatherMapAPIClient {
+    private static var getWeatherDefaultParams: [URLQueryItem] {
+        get {
+            return [
+                "units": "metric",
+                "exclude": "minutely"
+            ].asURLQueryParams()
+        }
+    }
+    
     static func getWeather(_ city: City, callback onComplete: @escaping (OneCallForecastResponse?, Error?) -> Void) {
-        
         let params: [URLQueryItem] = [
             URLQueryItem(name: "lat", value: String(city.lat)),
             URLQueryItem(name: "lon", value: String(city.long))
-        ]
-        
+        ] + self.getWeatherDefaultParams
+                
         self.getBaseRequest(.OneCall, params: params) { (weather: OneCallForecastResponse?, error) in
+            onComplete(weather, error)
+        }
+    }
+}
+
+// GEO API
+extension OpenWeatherMapAPIClient {
+    private static var searchCityDefaultParams: [URLQueryItem] {
+        get {
+            return [
+                "limit": "5",
+            ].asURLQueryParams()
+        }
+    }
+    
+    static func searchCity(_ query: String, callback onComplete: @escaping ([CitySearchResult]?, Error?) -> Void) {
+        let params: [URLQueryItem] = [
+            URLQueryItem(name: "q", value: query),
+        ] + self.searchCityDefaultParams
+                
+        self.getBaseRequest(.Geo, params: params) { (weather: [CitySearchResult]?, error) in
             onComplete(weather, error)
         }
     }

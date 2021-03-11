@@ -60,6 +60,8 @@ struct WeatherAlert: Codable {
     var start, end: TimeInterval
 }
 
+// MARK: API responses
+
 struct OneCallForecastResponse: Codable {
     var lat: Double
     var lon: Double
@@ -70,5 +72,15 @@ struct OneCallForecastResponse: Codable {
     var daily: [MultiWeather]?
 //    var minutely: [Weather]?  // TODO: implement
     var alerts: [WeatherAlert]?
+}
+
+struct CitySearchResult: Codable, Identifiable {
+    var name: String
+    var local_names: Dictionary<String,String>
+    var lat, lon: Double
+    var country: String
+    var state: String?
+    
+    var id: String { "\(String(lat))-\(String(lon))" }
 }
 
