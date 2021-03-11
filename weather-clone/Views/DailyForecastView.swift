@@ -10,16 +10,17 @@ struct DailyForecastView: View {
     var body: some View {
         HStack {
             Text(self.dayString)
-                .frame(width: 150, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             FallbackSystemImage(source: self.data.weather?.first?.icon, fallbackSystemIcon: "questionmark.circle")
                 .frame(width: 30, height: 30)
             
             // FIXME: make temps equal width, so they are aligned in column in pretty way
-            Spacer()
-            Text(self.data.temp?.max?.formatted() ?? "20")
+            Text(self.data.temp?.max?.formatted() ?? "")
+                .frame(minWidth: 40)
             Spacer().frame(width: 34)
-            Text(self.data.temp?.min?.formatted() ?? "10")
+            Text(self.data.temp?.min?.formatted() ?? "")
+                .frame(minWidth: 40)
                 .foregroundColor(Color.gray)
         }.padding(.horizontal, 24)
     }
