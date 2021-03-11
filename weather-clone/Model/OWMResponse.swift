@@ -1,10 +1,5 @@
 import Foundation
 
-struct DailyTemperature: Codable {
-    var morn, day, eve, night: Temperature
-    var min, max: Temperature?
-}
-
 // FIXME: setting all fields to Optional seems wrong, consider refactoring
 struct Weather: Codable, Identifiable {
     var id: String { "\(String(describing: dt))" }
@@ -48,6 +43,11 @@ struct MultiWeather: Codable, Identifiable {
     var rain, snow: Double?  // mm
     
     var id: String { "\(String(describing: dt))" }
+}
+
+struct DailyTemperature: Codable {
+    var morn, day, eve, night: Temperature
+    var min, max: Temperature?
 }
 
 struct WeatherDescription: Codable {

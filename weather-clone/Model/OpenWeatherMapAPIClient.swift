@@ -6,8 +6,6 @@ class OpenWeatherMapAPIClient {
     private static let host: String = "api.openweathermap.org"
     private static let apiKey: String = "a002bd4fab71c3e41d079ddd94e9f030"  // Storing API keys in repo is no-no, but it's just a demo, right?
     
-    init() { }
-    
     static func baseUrl(method: OWMAPIMethods, params: [URLQueryItem]) -> URL? {
         var url = URLComponents()
         url.scheme = "https"
