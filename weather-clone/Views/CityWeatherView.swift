@@ -39,6 +39,8 @@ struct CityWeatherView: View {
                     }
                 }
             }
+        }.onAppear {
+            self.weather.fetchData()
         }
     }
 }

@@ -7,14 +7,13 @@ class WeatherViewModel: ObservableObject {
     @Published var dailyWeather: [MultiWeather]?
     
     var city: City
-    var isLoading: Bool = false
+    var isLoading: Bool = true
     
     init(_ city: City) {
         self.city = city
-        self.fetchWeatherData()
     }
     
-    func fetchWeatherData() {
+    func fetchData() {
         self.isLoading = true
         OpenWeatherMapAPIClient.getWeather(self.city) { weather, error in
             if weather != nil {
